@@ -1,59 +1,437 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# BriBooks Mini Book Writing Platform
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Overview
 
-## About Laravel
+BriBooks Mini Book Writing Platform is a Laravel-based REST API application that enables authors to create, manage, review, version, and publish books through a structured workflow.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The platform supports role-based access control, manuscript uploads, content moderation, version history, and publishing workflows.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+# Technology Stack
 
-## Learning Laravel
+* PHP 8.3
+* Laravel 12
+* MySQL
+* JWT Authentication
+* PHPUnit
+* REST API
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# Architecture
 
-## Laravel Sponsors
+The project follows a layered architecture:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```text
+Controller
+    ↓
+Service Layer
+    ↓
+Repository Layer
+    ↓
+Database
+```
 
-### Premium Partners
+### Components
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+* Controllers
+* Services
+* Repositories
+* DTOs
+* Policies
+* Request Validation
+* Enums
+* Feature Tests
 
-## Contributing
+### Design Patterns
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+* Service Pattern
+* Repository Pattern
+* DTO Pattern
+* Policy-Based Authorization
+* Dependency Injection
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# Features
 
-## Security Vulnerabilities
+## Authentication
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+* Register
+* Login
+* Profile
+* Logout
+* JWT Authentication
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## User Roles
+
+### Author
+
+* Create Books
+* Manage Chapters
+* Manage Pages
+* Upload Manuscripts
+* Submit Books
+
+### Reviewer
+
+* Review Submitted Books
+* Approve Books
+* Reject Books
+
+### Admin
+
+* Publish Approved Books
+* View Platform Data
+
+---
+
+## Book Management
+
+* Create Book
+* Update Book
+* Delete Book
+* View Book
+* Ownership Validation
+
+---
+
+## Chapter Management
+
+* Create Chapter
+* Update Chapter
+* Delete Chapter
+* List Chapters
+
+---
+
+## Page Management
+
+* Create Page
+* Update Page
+* Delete Page
+* List Pages
+
+---
+
+## Version Control
+
+* Snapshot Storage
+* Version History
+* Rollback Support
+* Audit Trail
+
+---
+
+## Upload Management
+
+* Upload Manuscripts
+* Track Upload Status
+* Conversion Processing
+* Upload History
+
+---
+
+## Moderation Service
+
+Detects:
+
+* Restricted Words
+* Profanity
+* Unsafe Content
+
+Examples:
+
+```text
+bomb
+terrorism
+violence
+idiot
+abuse
+```
+
+---
+
+## Publishing Workflow
+
+```text
+Draft
+   ↓
+Submitted
+   ↓
+Approved
+   ↓
+Published
+```
+
+Workflow Rules:
+
+* Authors submit books
+* Reviewers approve/reject books
+* Admins publish books
+* Published books become read-only
+
+---
+
+## Dashboard
+
+Provides statistics:
+
+* Total Books
+* Draft Books
+* Submitted Books
+* Approved Books
+* Published Books
+* Chapters Count
+* Pages Count
+* Upload Count
+
+---
+
+# Installation
+
+## Clone Repository
+
+```bash
+git clone https://github.com/saurabh-98/bribooks.git
+
+cd bribooks
+```
+
+## Install Dependencies
+
+```bash
+composer install
+```
+
+## Configure Environment
+
+```bash
+cp .env.example .env
+```
+
+Generate application key:
+
+```bash
+php artisan key:generate
+```
+
+Generate JWT secret:
+
+```bash
+php artisan jwt:secret
+```
+
+Configure database credentials in:
+
+```env
+.env
+```
+
+Run migrations:
+
+```bash
+php artisan migrate
+```
+
+---
+
+# Seed Database
+
+The project includes seeders for testing different user roles.
+
+Run:
+
+```bash
+php artisan db:seed
+```
+
+or
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+Default Seeded Users:
+
+| Role     | Email                                         |
+| -------- | --------------------------------------------- |
+| Admin    | [admin@test.com](mailto:admin@test.com)       |
+| Reviewer | [reviewer@test.com](mailto:reviewer@test.com) |
+| Author   | [author@test.com](mailto:author@test.com)     |
+
+Password for all users:
+
+```text
+password
+```
+
+---
+
+# Start Application
+
+```bash
+php artisan serve
+```
+
+Application URL:
+
+```text
+http://127.0.0.1:8000
+```
+
+---
+
+# API Endpoints
+
+## Authentication
+
+| Method | Endpoint           |
+| ------ | ------------------ |
+| POST   | /api/auth/register |
+| POST   | /api/auth/login    |
+| GET    | /api/auth/profile  |
+| POST   | /api/auth/logout   |
+
+---
+
+## Dashboard
+
+| Method | Endpoint       |
+| ------ | -------------- |
+| GET    | /api/dashboard |
+
+---
+
+## Books
+
+| Method | Endpoint          |
+| ------ | ----------------- |
+| GET    | /api/books        |
+| POST   | /api/books        |
+| GET    | /api/books/{book} |
+| PUT    | /api/books/{book} |
+| PATCH  | /api/books/{book} |
+| DELETE | /api/books/{book} |
+
+---
+
+## Chapters
+
+| Method | Endpoint                   |
+| ------ | -------------------------- |
+| GET    | /api/books/{book}/chapters |
+| POST   | /api/books/{book}/chapters |
+| GET    | /api/chapters/{chapter}    |
+| PUT    | /api/chapters/{chapter}    |
+| PATCH  | /api/chapters/{chapter}    |
+| DELETE | /api/chapters/{chapter}    |
+
+---
+
+## Pages
+
+| Method | Endpoint                      |
+| ------ | ----------------------------- |
+| GET    | /api/chapters/{chapter}/pages |
+| POST   | /api/chapters/{chapter}/pages |
+| GET    | /api/pages/{page}             |
+| PUT    | /api/pages/{page}             |
+| PATCH  | /api/pages/{page}             |
+| DELETE | /api/pages/{page}             |
+
+---
+
+## Versions
+
+| Method | Endpoint                                      |
+| ------ | --------------------------------------------- |
+| POST   | /api/books/{book}/versions                    |
+| GET    | /api/books/{book}/versions                    |
+| GET    | /api/books/{book}/versions/{version}          |
+| POST   | /api/books/{book}/versions/{version}/rollback |
+
+---
+
+## Uploads
+
+| Method | Endpoint                  |
+| ------ | ------------------------- |
+| POST   | /api/books/{book}/upload  |
+| GET    | /api/books/{book}/uploads |
+| GET    | /api/uploads/{upload}     |
+| DELETE | /api/uploads/{upload}     |
+
+---
+
+## Workflow
+
+| Method | Endpoint                  |
+| ------ | ------------------------- |
+| POST   | /api/books/{book}/submit  |
+| POST   | /api/books/{book}/approve |
+| POST   | /api/books/{book}/reject  |
+| POST   | /api/books/{book}/publish |
+
+---
+
+# Testing
+
+Run all tests:
+
+```bash
+php artisan test
+```
+
+Latest Result:
+
+```text
+PASS 33 Tests
+PASS 47 Assertions
+FAILURES 0
+```
+
+Covered Areas:
+
+* Authentication
+* Authorization
+* Book CRUD
+* Moderation Service
+* Workflow Logic
+* Review Process
+* Version Management
+* Dashboard
+
+---
+
+# Security Features
+
+* JWT Authentication
+* Password Hashing
+* Request Validation
+* Authorization Policies
+* Protected Routes
+* Role-Based Access Control
+
+---
+
+# Assumptions
+
+* Uploaded manuscripts are converted into pages.
+* Version snapshots are stored as JSON.
+* Submitted books are eligible for review.
+* Published books cannot be modified.
+
+---
+
+# Author
+
+**Saurabh Kumar Jha**
+
+PHP / Laravel Developer
+
+GitHub:
+https://github.com/saurabh-98
